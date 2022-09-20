@@ -1,0 +1,11 @@
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    list-style: none;
+
+}
