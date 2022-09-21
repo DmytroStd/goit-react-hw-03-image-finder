@@ -16,7 +16,13 @@ class Modal extends Component {
   }
 
   handleBackdropClick = e => {
-    if (e.currentTarget === e.target || e.code === 'Escape') {
+    if (e.currentTarget === e.target) {
+      this.props.onClose();
+    }
+  };
+
+  handleKeyDown = e => {
+    if (e.code === 'Escape') {
       this.props.onClose();
     }
   };
