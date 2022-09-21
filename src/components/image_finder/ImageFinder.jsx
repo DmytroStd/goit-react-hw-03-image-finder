@@ -4,6 +4,7 @@ import ImageGallery from 'components/image_gallery/ImageGallery';
 import Loader from '../loader/Loader';
 import Modal from '../modal/Modal';
 import Button from 'components/button/Button';
+import PropTypes from 'prop-types';
 
 export default class ImageFinder extends Component {
   state = {
@@ -73,3 +74,11 @@ export default class ImageFinder extends Component {
     );
   }
 }
+
+ImageFinder.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      largeImageURL: PropTypes.string.isRequired,
+    })
+  ),
+};
