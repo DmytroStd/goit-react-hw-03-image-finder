@@ -54,7 +54,7 @@ export default class ImageFinder extends Component {
   render() {
     const { page, images, loading, error, total, largeImageURL } = this.state;
     const { loadMore } = this.props;
-    console.log(loadMore);
+
     return (
       <>
         {loading && <Loader />}
@@ -64,9 +64,7 @@ export default class ImageFinder extends Component {
             toggleModal={this.toggleModal}
           />
         )}
-        {12 * page <= total && (
-          <Button onClick={this.props.loadMore} text={'load more'} />
-        )}
+        {12 * page <= total && <Button onClick={loadMore} text={'load more'} />}
         {largeImageURL && (
           <Modal onClose={this.toggleModal} src={largeImageURL} />
         )}
