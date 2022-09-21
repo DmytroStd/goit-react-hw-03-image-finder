@@ -12,15 +12,16 @@ export class App extends Component {
     this.setState({ search, page: 1 });
   };
 
+  loadMore = () => {
+    this.setState(({ page }) => ({ page: page + 1 }));
+  };
+
   render() {
     const { search, page } = this.state;
     return (
       <>
         <Searchbar onSubmit={this.handleFormSubmt} />
-        <ImageFinder query={search} page={page} />
-        {/* <ImageGallery />
-      <Button />
-      <Modal /> */}
+        <ImageFinder query={search} loadMore={this.loadMore} page={page} />
         <ToastContainer autoClose={2000} theme="dark" />
       </>
     );

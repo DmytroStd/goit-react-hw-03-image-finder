@@ -7,7 +7,6 @@ import Button from 'components/button/Button';
 
 export default class ImageFinder extends Component {
   state = {
-    page: 1,
     images: null,
     loading: false,
     largeImageURL: '',
@@ -16,7 +15,7 @@ export default class ImageFinder extends Component {
   };
 
   async componentDidUpdate(prevProps, prevState) {
-    const { page } = this.state;
+    const { page } = this.props;
     const prevImage = prevProps.query;
     const nextImage = this.props.query;
     if (prevImage !== nextImage) {
@@ -35,7 +34,7 @@ export default class ImageFinder extends Component {
       }
     }
 
-    if (prevState.page !== page && page !== 1) {
+    if (prevProps.page !== page && page !== 1) {
       try {
         this.setState({ loading: true });
         const responce = await Pixabay(page, nextImage);
@@ -48,19 +47,14 @@ export default class ImageFinder extends Component {
     }
   }
 
-  loadMore = () => {
-    this.setState(({ page }) => ({
-      page: page + 1,
-    }));
-  };
-
   toggleModal = largeImageURL => {
     this.setState({ largeImageURL });
   };
 
   render() {
     const { page, images, loading, error, total, largeImageURL } = this.state;
-
+    const { loadMore } = this.props;
+    console.log(loadMore);
     return (
       <>
         {loading && <Loader />}
@@ -71,7 +65,7 @@ export default class ImageFinder extends Component {
           />
         )}
         {12 * page <= total && (
-          <Button onClick={this.loadMore} text={'load more'} />
+          <Button onClick={this.props.loadMore} text={'load more'} />
         )}
         {largeImageURL && (
           <Modal onClose={this.toggleModal} src={largeImageURL} />
